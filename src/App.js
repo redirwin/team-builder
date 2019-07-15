@@ -6,11 +6,24 @@ import "./styles/App.css";
 import Form from "./components/Form";
 
 export default function App() {
-  const [teamList, updateTeamList] = useState(data);
-  console.log("Team List: ", teamList);
+  const [team, updateTeam] = useState(data);
+  const [memberToEdit, updateMemberToEdit] = useState();
+  // console.log(team);
+  console.log(memberToEdit);
+
+  const handleSubmit = (event, member) => {
+    event.preventDefault();
+    // console.log(member);
+    updateTeam([...team, member]);
+  };
+
+  const editMember = (event, member) => {
+    updateMemberToEdit(member);
+  };
 
   return (
     <>
+      {" "}
       <table>
         <tbody>
           <tr>
@@ -19,9 +32,12 @@ export default function App() {
             <th>Role</th>
             <th>Email</th>
           </tr>
-          {data.map(member => {
+          {team.map(member => {
             return (
-              <tr key={member.email}>
+              <tr
+                key={member.email}
+                onClick={event => editMember(event, member)}
+              >
                 <td>{member.firstName}</td>
                 <td>{member.lastName}</td>
                 <td>{member.role}</td>
@@ -31,7 +47,11 @@ export default function App() {
           })}
         </tbody>
       </table>
-      <Form />
+      <Form
+        teamList={team}
+        handleSubmit={handleSubmit}
+        memberToEdit={memberToEdit}
+      />
     </>
   );
 }

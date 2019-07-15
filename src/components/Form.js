@@ -7,20 +7,14 @@ export default function Form(props) {
     role: "",
     email: ""
   });
-  console.log(member);
+  //   console.log(props);
 
   const handleChange = event => {
     setMember({ ...member, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log(member.firstName);
-    console.log(member.role);
-  };
-
   return (
-    <form onSubmit={event => handleSubmit(event)}>
+    <form onSubmit={event => props.handleSubmit(event, member)}>
       <label>
         First Name:
         <input
