@@ -18,6 +18,12 @@ const data = [
     lastName: "Fletcher",
     role: "Architect",
     email: "ferb@email.com"
+  },
+  {
+    firstName: "Buford",
+    lastName: "Van Stromm",
+    role: "Security",
+    email: "buford@email.com"
   }
 ];
 

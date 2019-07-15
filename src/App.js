@@ -5,15 +5,33 @@ import "./styles/App.css";
 
 import Form from "./components/Form";
 
-function App() {
+export default function App() {
   const [teamList, updateTeamList] = useState(data);
   console.log("Team List: ", teamList);
 
   return (
-    <div className="App">
+    <>
+      <table>
+        <tbody>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Email</th>
+          </tr>
+          {data.map(member => {
+            return (
+              <tr key={member.email}>
+                <td>{member.firstName}</td>
+                <td>{member.lastName}</td>
+                <td>{member.role}</td>
+                <td>{member.email}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       <Form />
-    </div>
+    </>
   );
 }
-
-export default App;
