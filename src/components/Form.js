@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
 
 export default function Form(props) {
-  const [member, setMember] = useState({
+  const [input, setInput] = useState({
     firstName: "",
     lastName: "",
     role: "",
     email: ""
   });
-  console.log(props);
 
   useEffect(() => {
-    setMember(props.memberToEdit);
+    setInput(props.memberToEdit);
   }, [props.memberToEdit]);
 
-  const handleChange = event => {
-    setMember({ ...member, [event.target.name]: event.target.value });
+  const handleChanges = event => {
+    setInput({ ...input, [event.target.name]: event.target.value });
   };
 
   return (
-    <form onSubmit={event => props.handleSubmit(event, member)}>
+    <form
+      onSubmit={event => props.handleSubmit(event, input, props.memberToEdit)}
+    >
       <label>
         First Name:
         <input
           type="text"
           name="firstName"
-          value={member.firstName}
-          onChange={event => handleChange(event)}
+          value={input.firstName}
+          onChange={event => handleChanges(event)}
         />
       </label>
       <label>
@@ -33,8 +34,8 @@ export default function Form(props) {
         <input
           type="text"
           name="lastName"
-          value={member.lastName}
-          onChange={event => handleChange(event)}
+          value={input.lastName}
+          onChange={event => handleChanges(event)}
         />
       </label>
       <label>
@@ -42,8 +43,8 @@ export default function Form(props) {
         <input
           type="text"
           name="role"
-          value={member.role}
-          onChange={event => handleChange(event)}
+          value={input.role}
+          onChange={event => handleChanges(event)}
         />
       </label>
       <label>
@@ -51,8 +52,8 @@ export default function Form(props) {
         <input
           type="email"
           name="email"
-          value={member.email}
-          onChange={event => handleChange(event)}
+          value={input.email}
+          onChange={event => handleChanges(event)}
         />
       </label>
       <button>Submit</button>

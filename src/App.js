@@ -7,22 +7,19 @@ import Form from "./components/Form";
 
 export default function App() {
   const [team, updateTeam] = useState(data);
-  const [memberToEdit, updateMemberToEdit] = useState({});
-  console.log(memberToEdit);
+  const [memberToEdit, updateMemberToEdit] = useState({ name: "" });
 
   const handleSubmit = (event, member) => {
     event.preventDefault();
-    // console.log(member);
     updateTeam([...team, member]);
   };
 
-  const editMember = (event, member) => {
-    console.log(member);
+  const editMember = member => {
+    console.log("Edit this member: ", member);
   };
 
   return (
     <>
-      {" "}
       <table>
         <tbody>
           <tr>
@@ -50,6 +47,7 @@ export default function App() {
         teamList={team}
         handleSubmit={handleSubmit}
         memberToEdit={memberToEdit}
+        editMember={editMember}
       />
     </>
   );
