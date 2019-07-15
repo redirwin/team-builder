@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Form(props) {
   const [member, setMember] = useState({
@@ -7,7 +7,11 @@ export default function Form(props) {
     role: "",
     email: ""
   });
-  //   console.log(props);
+  console.log(props);
+
+  useEffect(() => {
+    setMember(props.memberToEdit);
+  }, [props.memberToEdit]);
 
   const handleChange = event => {
     setMember({ ...member, [event.target.name]: event.target.value });

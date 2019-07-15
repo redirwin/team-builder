@@ -7,8 +7,7 @@ import Form from "./components/Form";
 
 export default function App() {
   const [team, updateTeam] = useState(data);
-  const [memberToEdit, updateMemberToEdit] = useState();
-  // console.log(team);
+  const [memberToEdit, updateMemberToEdit] = useState({});
   console.log(memberToEdit);
 
   const handleSubmit = (event, member) => {
@@ -18,7 +17,7 @@ export default function App() {
   };
 
   const editMember = (event, member) => {
-    updateMemberToEdit(member);
+    console.log(member);
   };
 
   return (
@@ -36,7 +35,7 @@ export default function App() {
             return (
               <tr
                 key={member.email}
-                onClick={event => editMember(event, member)}
+                onClick={event => updateMemberToEdit(member)}
               >
                 <td>{member.firstName}</td>
                 <td>{member.lastName}</td>
