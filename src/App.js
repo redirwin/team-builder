@@ -3,19 +3,34 @@ import data from "./data/data";
 
 import "./styles/App.css";
 
-import Form from "./components/Form";
+import AddMember from "./components/AddMember";
+import EditMember from "./components/EditMember";
 
 export default function App() {
   const [team, updateTeam] = useState(data);
-  const [memberToEdit, updateMemberToEdit] = useState({ name: "" });
+  const [memberToEdit, updateMemberToEdit] = useState({});
+  const [input, updateInput] = useState({});
 
-  const handleSubmit = (event, member) => {
+  const handleAdd = (event, input) => {
+    // console.log(input);
     event.preventDefault();
-    updateTeam([...team, member]);
+    if (
+      input.firstName === "" ||
+      input.lastName === "" ||
+      input.role === "" ||
+      input.email === ""
+    ) {
+      console.log("bad input");
+    } else {
+      updateTeam([...team, input]);
+      updateInput({});
+    }
   };
 
-  const editMember = member => {
-    console.log("Edit this member: ", member);
+  const loadEditForm = (event, member) => {
+    event.preventDefault();
+    updateMemberToEdit(member);
+    console.log("Edit this: ", member);
   };
 
   return (
@@ -32,7 +47,7 @@ export default function App() {
             return (
               <tr
                 key={member.email}
-                onClick={event => updateMemberToEdit(member)}
+                onClick={event => loadEditForm(event, member)}
               >
                 <td>{member.firstName}</td>
                 <td>{member.lastName}</td>
@@ -43,12 +58,7 @@ export default function App() {
           })}
         </tbody>
       </table>
-      <Form
-        teamList={team}
-        handleSubmit={handleSubmit}
-        memberToEdit={memberToEdit}
-        editMember={editMember}
-      />
+      <AddMember teamList={team} handleAdd={handleAdd} input={input} />
     </>
   );
 }
