@@ -3,6 +3,7 @@ import EditMember from "./EditMember";
 
 export default function DisplayMember(props) {
   const [editing, updateEditing] = useState(false);
+  const [object, setObject] = useState(props.member);
 
   const toggleEditing = event => {
     event.preventDefault();
@@ -15,16 +16,16 @@ export default function DisplayMember(props) {
         key={props.member.email}
         onClick={event => toggleEditing(event)}
       >
-        <span>{props.member.firstName}</span>
-        <span>{props.member.lastName}</span>
-        <span>{props.member.role}</span>
-        <span>{props.member.email}</span>
+        <span>{object.firstName}</span>
+        <span>{object.lastName}</span>
+        <span>{object.role}</span>
+        <span>{object.email}</span>
       </div>
       <div style={editing === false ? { display: "none" } : { display: "" }}>
         <EditMember
-          member={props.member}
+          member={object}
+          setObject={setObject}
           toggleEditing={toggleEditing}
-          handleEdit={props.handleEdit}
         />
       </div>
     </>

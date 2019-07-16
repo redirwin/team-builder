@@ -5,11 +5,12 @@ import "./styles/App.css";
 
 import DisplayMember from "./components/DisplayMember";
 import AddMember from "./components/AddMember";
-import EditMember from "./components/EditMember";
 
 export default function App() {
   const [team, updateTeam] = useState(data);
   const [input, updateInput] = useState({});
+
+  console.log(team);
 
   const handleAdd = (event, input) => {
     event.preventDefault();
@@ -26,9 +27,11 @@ export default function App() {
     }
   };
 
-  const handleEdit = (event, input) => {
+  const handleEdit = (event, previous, input) => {
     event.preventDefault();
-    console.log("Editing This: ", input);
+    team.map(member => {
+      member === previous ? updateTeam([]) : console.log(false);
+    });
   };
 
   return (
@@ -42,7 +45,7 @@ export default function App() {
           <span>Email</span>
         </div>
         {team.map(member => {
-          return <DisplayMember member={member} handleEdit={handleEdit} />;
+          return <DisplayMember member={member} />;
         })}
       </div>
     </>

@@ -8,18 +8,19 @@ export default function EditMember(props) {
     email: props.member.email
   });
 
-  const handleChanges = event => {
-    setInput({ ...input, [event.target.name]: event.target.value });
+  const handleChanges = e => {
+    // setInput({ ...input, [event.target.name]: event.target.value });
+    props.setObject({ ...props.member, [e.target.name]: e.target.value });
   };
 
   return (
-    <div onClick={e => props.handleEdit(e)}>
-      <form onSubmit={event => props.handleAdd(event, input)}>
+    <div>
+      <form onSubmit={event => props.toggleEditing(event)}>
         <input
           type="text"
           name="firstName"
           placeholder="First Name"
-          value={input.firstName}
+          value={props.member.firstName}
           onChange={event => handleChanges(event)}
         />
 
@@ -27,7 +28,7 @@ export default function EditMember(props) {
           type="text"
           name="lastName"
           placeholder="Last Name"
-          value={input.lastName}
+          value={props.member.lastName}
           onChange={event => handleChanges(event)}
         />
 
@@ -35,7 +36,7 @@ export default function EditMember(props) {
           type="text"
           name="role"
           placeholder="Role"
-          value={input.role}
+          value={props.member.role}
           onChange={event => handleChanges(event)}
         />
 
@@ -43,7 +44,7 @@ export default function EditMember(props) {
           type="email"
           name="email"
           placeholder="Email"
-          value={input.email}
+          value={props.member.email}
           onChange={event => handleChanges(event)}
         />
 
