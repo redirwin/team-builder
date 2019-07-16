@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 export default function EditMember(props) {
   const [input, setInput] = useState({
@@ -9,12 +10,11 @@ export default function EditMember(props) {
   });
 
   const handleChanges = e => {
-    // setInput({ ...input, [event.target.name]: event.target.value });
     props.setObject({ ...props.member, [e.target.name]: e.target.value });
   };
 
   return (
-    <div>
+    <EditForm>
       <form onSubmit={event => props.toggleEditing(event)}>
         <input
           type="text"
@@ -50,6 +50,10 @@ export default function EditMember(props) {
 
         <button>Save</button>
       </form>
-    </div>
+    </EditForm>
   );
 }
+
+const EditForm = styled.div`
+  width: 100%;
+`;
